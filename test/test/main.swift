@@ -53,6 +53,7 @@ func numberOfPrimesLessThan(_ number: Int) -> Int{
 //print(collapse("qqq") == "q3")
 //print(collapse("AABBBCRFFA") == "A2B3CRF2A")
 //print(collapse("A") == "A")
+//print(collapse("1112A") == "132A")
 
 
 // 2
@@ -62,4 +63,4 @@ func numberOfPrimesLessThan(_ number: Int) -> Int{
 // 2 3 5 7 11 13 17 19
 
 // 3
-print(bestPlayers(from: info))
+//print(bestPlayers(from: info))

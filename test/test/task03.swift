@@ -14,10 +14,8 @@ let info = [
 
 func bestPlayers(from playersInfo: [String: [String?]]) -> [String] {
     var players: [String] = []
-    for (key, _) in playersInfo {
-        guard let info = playersInfo[key] else { continue }
-        players.append(contentsOf: info.map { player in return player ?? ""})
+    for info in playersInfo.values {
+        players.append(contentsOf: info.compactMap{$0})
     }
-    players = players.compactMap {player in return player.count > 5 ? player : nil }.sorted(by: <)
-    return players
+    return players.compactMap {player in return player.count > 5 ? player : nil }.sorted(by: <)
 }

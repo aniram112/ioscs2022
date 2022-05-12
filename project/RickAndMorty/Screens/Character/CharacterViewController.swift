@@ -29,7 +29,6 @@ final class CharacterViewController: UIViewController {
         
         
         view.backgroundColor = .white
-        title = "character"
         
         setupUI()
         updateInfo()
@@ -45,6 +44,7 @@ final class CharacterViewController: UIViewController {
         scrollView.addSubview(containerView)
         containerView.addSubview(icon)
         containerView.addSubview(nameLabel)
+        scrollView.showsVerticalScrollIndicator = false
         
         infoCells.forEach{
             $0.translatesAutoresizingMaskIntoConstraints = false

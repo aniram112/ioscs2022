@@ -11,6 +11,8 @@ final class RootViewController: UITabBarController, UITabBarControllerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
+        self.tabBar.backgroundColor = .white
+        self.tabBar.tintColor = .black
         
         let model = CharacterViewController.Model(
             cellModel: [.init(key: "Status:", value: "Value"),.init(key: "Species:", value: "Value"),.init(key: "Gender:", value: "Value")],
@@ -19,15 +21,15 @@ final class RootViewController: UITabBarController, UITabBarControllerDelegate{
         )
         
         let tabOne = createCharacter(model: model)
-        let tabOneBarItem = UITabBarItem(title: model.name, image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill"))
+        let tabOneBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill"))
         tabOne.tabBarItem = tabOneBarItem
         
         let tabTwo = FavoritesViewController()
-        let tabTwoBarItem = UITabBarItem(title: "favorites", image: UIImage(systemName: "star"), selectedImage: UIImage(systemName: "star.fill"))
+        let tabTwoBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "star"), selectedImage: UIImage(systemName: "star.fill"))
         tabTwo.tabBarItem = tabTwoBarItem
         
         let tabThree = SearchViewController()
-        let tabThreeBarItem = UITabBarItem(title: "search", image: UIImage(systemName: "magnifyingglass.circle"), selectedImage: UIImage(systemName: "magnifyingglass.circle.fill"))
+        let tabThreeBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "magnifyingglass.circle"), selectedImage: UIImage(systemName: "magnifyingglass.circle.fill"))
         tabThree.tabBarItem = tabThreeBarItem
         
         self.viewControllers = [tabOne,tabTwo,tabThree]

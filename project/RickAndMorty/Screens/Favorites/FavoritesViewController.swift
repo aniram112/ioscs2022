@@ -95,6 +95,18 @@ extension FavoritesViewController: UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         1
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model = CharacterViewController.Model(
+            cellModel: [.init(key: "Status:", value: "Value"),.init(key: "Species:", value: "Value"),.init(key: "Gender:", value: "Value")],
+            name: "Character Name",
+            imageURL:  imageURLs[indexPath.row] ?? URL(string: "https://rickandmortyapi.com/api/character/avatar/1.jpeg")!
+        )
+        let Character = CharacterViewController(model: model)
+        navigationController?.modalPresentationStyle = .fullScreen
+        navigationController!.pushViewController(Character, animated: true)
+        
+    }
 }
 
 extension FavoritesViewController: UITableViewDataSource {

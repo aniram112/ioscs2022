@@ -23,7 +23,7 @@ final class CharacterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = "Character"
         scrollView.isUserInteractionEnabled = true
         scrollView.isScrollEnabled = true
         

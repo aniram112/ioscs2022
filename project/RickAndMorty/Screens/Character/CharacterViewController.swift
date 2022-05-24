@@ -112,6 +112,8 @@ final class CharacterViewController: UIViewController {
     private lazy var icon: UIImageView = {
         let ret = UIImageView()
         ret.layer.cornerRadius = 10
+        ret.layer.borderWidth = 1.0
+        ret.layer.borderColor = (UIColor.black).cgColor
         ret.layer.masksToBounds = true
         ret.contentMode = .scaleAspectFill
         return ret
@@ -119,7 +121,7 @@ final class CharacterViewController: UIViewController {
     
     private lazy var nameLabel: UILabel = {
         let ret = UILabel()
-        ret.font = .boldSystemFont(ofSize: 34)
+        ret.font = .largeTitleBold
         ret.numberOfLines = 1
         ret.textColor = .main
         return ret

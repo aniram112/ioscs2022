@@ -41,6 +41,8 @@ class CharacterCell: UITableViewCell {
     
     lazy var icon: UIImageView = {
         let ret = UIImageView()
+        ret.layer.borderWidth = 1.0
+        ret.layer.borderColor = (UIColor.black).cgColor
         ret.layer.cornerRadius = 10
         ret.layer.masksToBounds = true
         ret.contentMode = .scaleAspectFill

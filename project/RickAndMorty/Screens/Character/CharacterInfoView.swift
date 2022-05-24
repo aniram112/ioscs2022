@@ -60,7 +60,7 @@ final class InfoCell: UIView {
     
     private let infoKeyLabel: UILabel = {
         let ret = UILabel()
-        ret.font = .boldSystemFont(ofSize: 22)
+        ret.font = .title2
         ret.textColor = .gray
         ret.numberOfLines = 1
         return ret
@@ -68,7 +68,7 @@ final class InfoCell: UIView {
     
     private let infoValueLabel: UILabel = {
         let ret = UILabel()
-        ret.font = .boldSystemFont(ofSize: 22)
+        ret.font = .title2
         ret.textColor = .black
         ret.numberOfLines = 1
         return ret

@@ -40,9 +40,9 @@ final class HomeViewController: UIViewController, UINavigationControllerDelegate
         let bp = BigPictureViewController()
         print("tapped")
         let transition = CATransition()
-        transition.duration = 0.5
+        transition.duration = 1
         transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-        transition.type = CATransitionType.moveIn
+        transition.type = CATransitionType.push
         transition.subtype = CATransitionSubtype.fromTop
         
         navigationController?.view.layer.add(transition, forKey: kCATransition)

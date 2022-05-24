@@ -50,7 +50,7 @@ class CharacterCell: UITableViewCell {
     
     private lazy var label: UILabel = {
         let ret = UILabel()
-        ret.font = .boldSystemFont(ofSize: 20)
+        ret.font = .title2
         ret.numberOfLines = 1
         ret.textColor = .main
         return ret

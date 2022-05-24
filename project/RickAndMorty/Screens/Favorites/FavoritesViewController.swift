@@ -69,7 +69,7 @@ final class FavoritesViewController: UIViewController{
     
     private lazy var label: UILabel = {
         let ret = UILabel()
-        ret.font = .boldSystemFont(ofSize: 34)
+        ret.font = .largeTitleBold
         ret.numberOfLines = 1
         ret.textColor = .main
         return ret

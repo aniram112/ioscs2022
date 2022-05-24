@@ -56,7 +56,7 @@ class RecentCell: UITableViewCell {
     
     private lazy var label: UILabel = {
         let ret = UILabel()
-        ret.font = .boldSystemFont(ofSize: 20)
+        ret.font = .body
         ret.numberOfLines = 1
         ret.textColor = .main
         return ret
@@ -66,7 +66,7 @@ class RecentCell: UITableViewCell {
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 150, height: 180)
+        layout.itemSize = CGSize(width: 120, height: 160)
         layout.minimumLineSpacing = 20
         layout.minimumInteritemSpacing = 10
         

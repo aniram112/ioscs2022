@@ -32,6 +32,8 @@ final class FavoritesViewController: UIViewController{
                      URL(string: "https://rickandmortyapi.com/api/character/avatar/6.jpeg"),
         ]
         //searchBar.delegate = self
+        
+        // с large navigation title не вышло
         label.text = "Favorites"
         setupTableView()
         setupUI()

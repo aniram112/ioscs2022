@@ -36,12 +36,15 @@ final class SearchViewController: UIViewController{
         view.addSubview(tableView)
         
         searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.searchTextField.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             searchBar.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             searchBar.widthAnchor.constraint(equalTo: view.widthAnchor,constant: -50),
             searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            searchBar.searchTextField.heightAnchor.constraint(equalToConstant: 55),
+            searchBar.searchTextField.widthAnchor.constraint(equalTo: view.widthAnchor,constant: -50),
             
             tableView.topAnchor.constraint(equalTo: searchBar.safeAreaLayoutGuide.bottomAnchor, constant: 20),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -62,8 +65,15 @@ final class SearchViewController: UIViewController{
     
     private lazy var searchBar: UISearchBar = {
         let ret = UISearchBar()
-        ret.searchBarStyle = UISearchBar.Style.default
-        ret.placeholder = " Search..."
+        ret.searchBarStyle = UISearchBar.Style.prominent
+        ret.barTintColor = .white
+        //ret.layer.borderColor = (UIColor.black).cgColor
+        ret.searchTextField.layer.borderColor = (UIColor.black).cgColor
+        ret.searchTextField.layer.borderWidth = 1.0
+        ret.searchTextField.layer.cornerRadius = 10
+        ret.searchTextField.backgroundColor = .white
+        ret.placeholder = " Search for character"
+        ret.searchTextField.leftView?.tintColor = .black
         ret.sizeToFit()
         ret.isTranslucent = false
         ret.backgroundImage = UIImage()

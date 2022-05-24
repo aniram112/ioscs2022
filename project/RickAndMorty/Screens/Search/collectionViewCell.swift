@@ -21,6 +21,8 @@ class ImageCell : UICollectionViewCell{
         Image.translatesAutoresizingMaskIntoConstraints = false
         Image.image = UIImage()
         Image.layer.cornerRadius = 10
+        Image.layer.borderWidth = 1.0
+        Image.layer.borderColor = (UIColor.black).cgColor
         Image.layer.masksToBounds = true
         Image.contentMode = .scaleAspectFill
         NSLayoutConstraint.activate([

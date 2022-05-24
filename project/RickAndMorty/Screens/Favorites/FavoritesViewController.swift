@@ -48,8 +48,8 @@ final class FavoritesViewController: UIViewController{
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            label.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 5),
+            label.topAnchor.constraint(equalTo: view.topAnchor,constant: 66),
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 16),
             
             tableView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 30),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),

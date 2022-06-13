@@ -8,7 +8,8 @@ final class CharacterViewController: UIViewController {
     struct Model {
         let cellModel: [InfoCell.Model]
         let name: String
-        let imageURL: URL
+        let image: UIImage
+        let character: Character
     }
     
     init(model: Model) {
@@ -27,12 +28,37 @@ final class CharacterViewController: UIViewController {
         title = "Character"
         scrollView.isUserInteractionEnabled = true
         scrollView.isScrollEnabled = true
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(addToFav))
         
+        heart.isUserInteractionEnabled = true
+        heart.addGestureRecognizer(tapGestureRecognizer)
         
         view.backgroundColor = .customWhite
         
         setupUI()
         updateInfo()
+    }
+    
+    @objc func addToFav(sender: Any){
+        if (!Storage.shared.favCharacters.contains(model.character)){
+            heart.image = UIImage(systemName: "heart.fill")
+            Storage.shared.favCharacters.append(model.character)
+            Storage.shared.favImages.append(icon.image ?? UIImage())
+            Storage.shared.addFavs()
+            Storage.shared.addImages()
+
+            appLogger.logger.log(level: .info, message: "adding to faves")
+        } else{
+            heart.image = UIImage(systemName: "heart")
+            if let index = Storage.shared.favCharacters.firstIndex(of: model.character ) {
+                Storage.shared.favCharacters.remove(at: index)
+                Storage.shared.favImages.remove(at: index)
+                Storage.shared.addFavs()
+                Storage.shared.addImages()
+
+            }
+        }
+        
     }
     
     private func setupUI() {
@@ -103,7 +129,7 @@ final class CharacterViewController: UIViewController {
     }
     
     private func updateInfo() {
-        icon.kf.setImage(with: model.imageURL)
+        icon.image = model.image
         nameLabel.text = model.name
         var ind = 0
         infoCells.forEach{
@@ -128,6 +154,9 @@ final class CharacterViewController: UIViewController {
     private lazy var heart: UIImageView = {
         let ret = UIImageView()
         ret.image = UIImage(systemName: "heart")
+        if (Storage.shared.favCharacters.contains(model.character)){
+            ret.image = UIImage(systemName: "heart.fill")
+        }
         ret.tintColor = .customBlack
         return ret
     }()

@@ -35,6 +35,16 @@ final class HomeViewController: UIViewController, UINavigationControllerDelegate
         
         setupUI()
     }
+    override func viewDidLayoutSubviews() {
+            super.viewDidLayoutSubviews()
+            navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+            navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
     
     @objc func openNew(_ sender: UITapGestureRecognizer? = nil) {
         let bp = BigPictureViewController()

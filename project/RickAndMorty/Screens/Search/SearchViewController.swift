@@ -164,6 +164,22 @@ extension SearchViewController: UITableViewDelegate {
         1
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! CharacterSearchCell
+        
+        let model = CharacterViewController.Model(
+            cellModel: [.init(key: "Status:", value: characters[indexPath.row].status),.init(key: "Species:", value: characters[indexPath.row].species),.init(key: "Gender:", value: characters[indexPath.row].gender)],
+            name: characters[indexPath.row].name,
+            image: cell.icon.image ?? UIImage(),
+            character: characters[indexPath.row]
+        )
+        let Character = CharacterViewController(model: model)
+        appLogger.logger.log(level: .info, message: "opening character")
+        
+        navigationController?.modalPresentationStyle = .fullScreen
+        navigationController!.pushViewController(Character, animated: true)
+    }
+    
 }
 
 extension SearchViewController: UITableViewDataSource {
@@ -247,17 +263,18 @@ extension SearchViewController: UISearchResultsUpdating {
         //return characters.result
     }
     
-    public func getImage(url: String) async throws -> UIImage{
-        
-        guard let url = URL(string: url) else {return UIImage()}
-        let urlRequest = URLRequest(url: url)
-        
-        let (data, response) = try await URLSession.shared.data(for: urlRequest)
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else {return UIImage()}
-        
-        let img =  UIImage(data: data) ?? UIImage()
-        return img
-    }
+}
+
+public func getImage(url: String) async throws -> UIImage{
+    
+    guard let url = URL(string: url) else {return UIImage()}
+    let urlRequest = URLRequest(url: url)
+    
+    let (data, response) = try await URLSession.shared.data(for: urlRequest)
+    guard (response as? HTTPURLResponse)?.statusCode == 200 else {return UIImage()}
+    
+    let img =  UIImage(data: data) ?? UIImage()
+    return img
 }
 
 

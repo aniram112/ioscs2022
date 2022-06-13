@@ -32,6 +32,16 @@ final class BigPictureViewController: UIViewController, UIScrollViewDelegate{
         setupUI()
     }
     
+    override func viewDidLayoutSubviews() {
+            super.viewDidLayoutSubviews()
+            navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+            navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
     
     @objc func close(_ sender: UITapGestureRecognizer? = nil) {
         appLogger.logger.log(level: .info, message: "closed bigpic")

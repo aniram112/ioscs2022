@@ -24,7 +24,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //let navigationController = UINavigationController(rootViewController: FavoritesViewController())
         
         
-        
+        Storage.shared.getFavs()
+        Storage.shared.getImages()
         let tabBarController = RootViewController()
         let navigationController = UINavigationController(rootViewController: tabBarController)
         window.rootViewController = navigationController

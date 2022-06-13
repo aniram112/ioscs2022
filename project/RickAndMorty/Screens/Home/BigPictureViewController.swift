@@ -34,7 +34,7 @@ final class BigPictureViewController: UIViewController, UIScrollViewDelegate{
     
     
     @objc func close(_ sender: UITapGestureRecognizer? = nil) {
-        print("close func")
+        appLogger.logger.log(level: .info, message: "closed bigpic")
         //self.dismiss(animated: true, completion: nil)
         let transition = CATransition()
         transition.duration = 0.5

@@ -83,6 +83,7 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
     @objc func handleZoomingTap(sender: UITapGestureRecognizer) {
         let location = sender.location(in: sender.view)
         self.zoom(point: location, animated: true)
+        appLogger.logger.log(level: .info, message: "zoomed")
     }
     
     func zoom(point: CGPoint, animated: Bool) {

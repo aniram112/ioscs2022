@@ -22,6 +22,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //let navigationController = UINavigationController(rootViewController: CharacterViewController(model: model))
         //let navigationController = UINavigationController(rootViewController: SearchViewController())
         //let navigationController = UINavigationController(rootViewController: FavoritesViewController())
+        
+        
+        
         let tabBarController = RootViewController()
         let navigationController = UINavigationController(rootViewController: tabBarController)
         window.rootViewController = navigationController

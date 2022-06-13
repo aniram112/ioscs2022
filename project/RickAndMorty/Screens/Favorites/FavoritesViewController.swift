@@ -23,7 +23,7 @@ final class FavoritesViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .customWhite
         imageURLs = [URL(string: "https://rickandmortyapi.com/api/character/avatar/1.jpeg"),
                      URL(string: "https://rickandmortyapi.com/api/character/avatar/2.jpeg"),
                      URL(string: "https://rickandmortyapi.com/api/character/avatar/3.jpeg"),
@@ -37,12 +37,14 @@ final class FavoritesViewController: UIViewController{
         label.text = "Favorites"
         setupTableView()
         setupUI()
-
+        
     }
     
     private func setupUI() {
         view.addSubview(label)
         view.addSubview(tableView)
+        view.backgroundColor = .customWhite
+        tableView.backgroundColor = .customWhite
         
         label.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -57,7 +59,7 @@ final class FavoritesViewController: UIViewController{
             tableView.widthAnchor.constraint(equalTo: view.widthAnchor)
             
         ])
-                
+        
     }
     
     private func setupTableView() {
@@ -71,7 +73,7 @@ final class FavoritesViewController: UIViewController{
         let ret = UILabel()
         ret.font = .largeTitleBold
         ret.numberOfLines = 1
-        ret.textColor = .main
+        ret.textColor = .customBlack
         return ret
     }()
     
@@ -89,9 +91,21 @@ final class FavoritesViewController: UIViewController{
     
 }
 
+public func getCharacter(id: Int) async throws {
+    
+        guard let url = URL(string: "https://rickandmortyapi.com/api/character/"+String(id)) else { fatalError("Missing URL") }
+        let urlRequest = URLRequest(url: url)
+        let (data, response) = try await URLSession.shared.data(for: urlRequest)
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else { fatalError("Error while fetching data") }
+        let character = try JSONDecoder().decode(Character.self, from: data)
+        print("Async character", character)
+    
+    
+}
+
 extension FavoritesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection
-                    section: Int) -> Int {
+                   section: Int) -> Int {
         imageURLs.count
     }
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -105,6 +119,15 @@ extension FavoritesViewController: UITableViewDelegate {
             imageURL:  imageURLs[indexPath.row] ?? URL(string: "https://rickandmortyapi.com/api/character/avatar/1.jpeg")!
         )
         let Character = CharacterViewController(model: model)
+        appLogger.logger.log(level: .info, message: "opening character")
+        Task{
+            do{
+                try await getCharacter(id: indexPath.row+1)
+            }
+            catch{
+                appLogger.logger.log(level: .error, message: "async error")
+            }
+        }
         navigationController?.modalPresentationStyle = .fullScreen
         navigationController!.pushViewController(Character, animated: true)
         
@@ -113,7 +136,7 @@ extension FavoritesViewController: UITableViewDelegate {
 
 extension FavoritesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath:
-                    IndexPath) -> UITableViewCell {
+                   IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "CharacterCell",
             for: indexPath

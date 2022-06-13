@@ -17,8 +17,8 @@ final class RootViewController: UITabBarController, UITabBarControllerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
-        self.tabBar.backgroundColor = .white
-        self.tabBar.tintColor = .black
+        self.tabBar.backgroundColor = .customWhite
+        self.tabBar.tintColor = .customBlack
         //self.navigationController?.navigationBar.tintColor = .black
         
         
@@ -43,7 +43,8 @@ final class RootViewController: UITabBarController, UITabBarControllerDelegate{
         self.viewControllers = [tabOne,tabTwo,tabThree]
         
     }
-
+    
+    
     
     func createCharacter(model: CharacterViewController.Model) -> CharacterViewController{
         return CharacterViewController(model: model)

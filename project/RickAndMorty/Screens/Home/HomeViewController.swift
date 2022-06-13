@@ -8,7 +8,7 @@
 import UIKit
 final class HomeViewController: UIViewController, UINavigationControllerDelegate{
     
-    
+    //public var appLogger = Logger(writers: [ConsoleWriter(),FileWriter()], minlevel: Level.info)
     let bigTitle = UILabel()
     
     @available(*, unavailable)
@@ -23,7 +23,7 @@ final class HomeViewController: UIViewController, UINavigationControllerDelegate
     override func viewDidLoad() {
         self.navigationController?.delegate = self
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .customWhite
         bigTitle.attributedText = NSMutableAttributedString(string: "RICK AND MORTY", attributes: strokeTextAttributes)
         smallTitle.text = "CHARACTER BOOK"
         smallTitle.addCharacterSpacing(kernValue: 3)
@@ -38,7 +38,7 @@ final class HomeViewController: UIViewController, UINavigationControllerDelegate
     
     @objc func openNew(_ sender: UITapGestureRecognizer? = nil) {
         let bp = BigPictureViewController()
-        print("tapped")
+        appLogger.logger.log(level: .info, message: "opened bigpic")
         let transition = CATransition()
         transition.duration = 1
         transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
@@ -54,6 +54,7 @@ final class HomeViewController: UIViewController, UINavigationControllerDelegate
         view.addSubview(bigTitle)
         view.addSubview(smallTitle)
         view.addSubview(smallPicture)
+    
         
         bigTitle.translatesAutoresizingMaskIntoConstraints = false
         bigTitle.lineBreakMode = .byWordWrapping
@@ -84,7 +85,7 @@ final class HomeViewController: UIViewController, UINavigationControllerDelegate
         let ret = UILabel()
         ret.font = .largeTitleBlack
         ret.numberOfLines = 1
-        ret.textColor = .black
+        ret.textColor = .customBlack
         ret.lineBreakMode = .byWordWrapping
         ret.numberOfLines = 2
         return ret
@@ -99,8 +100,8 @@ final class HomeViewController: UIViewController, UINavigationControllerDelegate
     
     
     let strokeTextAttributes = [
-        NSAttributedString.Key.strokeColor : UIColor.black,
-        NSAttributedString.Key.foregroundColor : UIColor.white,
+        NSAttributedString.Key.strokeColor : UIColor.customBlack,
+        NSAttributedString.Key.foregroundColor : UIColor.customWhite,
         NSAttributedString.Key.strokeWidth : -1.0,
         NSAttributedString.Key.kern : 3,
         NSAttributedString.Key.font : UIFont.largeTitleWhite as Any]

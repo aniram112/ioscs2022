@@ -58,7 +58,7 @@ class RecentCell: UITableViewCell {
         let ret = UILabel()
         ret.font = .body
         ret.numberOfLines = 1
-        ret.textColor = .main
+        ret.textColor = .customWhite
         return ret
     }()
     
@@ -95,7 +95,7 @@ extension RecentCell: UICollectionViewDataSource {
 extension RecentCell: UICollectionViewDelegate {
  
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       print("User tapped on item \(indexPath.row)")
+        appLogger.logger.log(level: .info, message: "tapped on item \(indexPath.row)")
     }
 }
 

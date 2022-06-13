@@ -10,7 +10,7 @@ class CharacterCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        backgroundColor = .white
+        backgroundColor = .customWhite
         label.text = "Character Name"
         setupUI()
         
@@ -33,7 +33,8 @@ class CharacterCell: UITableViewCell {
             icon.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 5),
             
             label.centerYAnchor.constraint(equalTo: icon.centerYAnchor),
-            label.leadingAnchor.constraint(equalTo: icon.trailingAnchor,constant: 20)
+            label.leadingAnchor.constraint(equalTo: icon.trailingAnchor,constant: 20),
+            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
     
@@ -50,11 +51,12 @@ class CharacterCell: UITableViewCell {
     }()
     
     
-    private lazy var label: UILabel = {
+    lazy var label: UILabel = {
         let ret = UILabel()
         ret.font = .title2
-        ret.numberOfLines = 1
-        ret.textColor = .main
+        ret.numberOfLines = 3
+        ret.contentMode = .scaleToFill
+        ret.textColor = .customBlack
         return ret
     }()
 }

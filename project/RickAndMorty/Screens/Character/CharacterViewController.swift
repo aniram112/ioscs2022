@@ -23,12 +23,13 @@ final class CharacterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         title = "Character"
         scrollView.isUserInteractionEnabled = true
         scrollView.isScrollEnabled = true
         
         
-        view.backgroundColor = .white
+        view.backgroundColor = .customWhite
         
         setupUI()
         updateInfo()
@@ -44,6 +45,7 @@ final class CharacterViewController: UIViewController {
         scrollView.addSubview(containerView)
         containerView.addSubview(icon)
         containerView.addSubview(nameLabel)
+        containerView.addSubview(heart)
         scrollView.showsVerticalScrollIndicator = false
         
         infoCells.forEach{
@@ -74,9 +76,13 @@ final class CharacterViewController: UIViewController {
         NSLayoutConstraint.activate([
             icon.widthAnchor.constraint(equalToConstant: 300),
             icon.heightAnchor.constraint(equalToConstant: 300),
+            heart.widthAnchor.constraint(equalToConstant: 32),
+            heart.heightAnchor.constraint(equalToConstant: 32),
             icon.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             icon.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
             nameLabel.topAnchor.constraint(equalTo: icon.bottomAnchor, constant: 35),
+            heart.topAnchor.constraint(equalTo: nameLabel.topAnchor,constant: 5),
+            heart.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor,constant: 20),
             nameLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16)
         ])
         
@@ -119,11 +125,18 @@ final class CharacterViewController: UIViewController {
         return ret
     }()
     
+    private lazy var heart: UIImageView = {
+        let ret = UIImageView()
+        ret.image = UIImage(systemName: "heart")
+        ret.tintColor = .customBlack
+        return ret
+    }()
+    
     private lazy var nameLabel: UILabel = {
         let ret = UILabel()
         ret.font = .largeTitleBold
         ret.numberOfLines = 1
-        ret.textColor = .main
+        ret.textColor = .customBlack
         return ret
     }()
     

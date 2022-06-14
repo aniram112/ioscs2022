@@ -22,12 +22,60 @@ class RickAndMortyUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
+    func testSearchAndFavs() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        app.tabBars["Tab Bar"].buttons["search"].tap()
+        app/*@START_MENU_TOKEN@*/.keys["R"]/*[[".keyboards.keys[\"R\"]",".keys[\"R\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        
+        let iKey = app/*@START_MENU_TOKEN@*/.keys["i"]/*[[".keyboards.keys[\"i\"]",".keys[\"i\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        iKey.tap()
+        
+        let cKey = app/*@START_MENU_TOKEN@*/.keys["c"]/*[[".keyboards.keys[\"c\"]",".keys[\"c\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        cKey.tap()
+        
+        let kKey = app/*@START_MENU_TOKEN@*/.keys["k"]/*[[".keyboards.keys[\"k\"]",".keys[\"k\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        kKey.tap()
+        
+        let rickSanchezStaticText = app.tables/*@START_MENU_TOKEN@*/.staticTexts["Rick Sanchez"]/*[[".cells.staticTexts[\"Rick Sanchez\"]",".staticTexts[\"Rick Sanchez\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        rickSanchezStaticText.tap()
+        app.scrollViews.otherElements.images["love"].tap()
+        sleep(1)
+        app.navigationBars["Character"].buttons["Back"].tap()
+        app.tabBars["Tab Bar"].buttons["love"].tap()
+        rickSanchezStaticText.tap()
+        app.scrollViews.otherElements.images["love"].tap()
+    }
+    
+    func testSearchAndHistory() throws {
+        // UI tests must launch the application that they test.
+        let app = XCUIApplication()
+        app.launch()
+        app.tabBars["Tab Bar"].buttons["search"].tap()
+        
+        let mKey = app.keys["M"]
+        mKey.tap()
+        
+        let oKey = app/*@START_MENU_TOKEN@*/.keys["o"]/*[[".keyboards.keys[\"o\"]",".keys[\"o\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        oKey.tap()
+        
+        let rKey = app.keys["r"]
+        rKey.tap()
+        
+        let tKey = app.keys["t"]
+        tKey.tap()
+        
+        let yKey = app/*@START_MENU_TOKEN@*/.keys["y"]/*[[".keyboards.keys[\"y\"]",".keys[\"y\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        yKey.tap()
+        
+        let tablesQuery = app.tables
+        tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["Morty Smith"]/*[[".cells.staticTexts[\"Morty Smith\"]",".staticTexts[\"Morty Smith\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        let backButton = app.navigationBars["Character"].buttons["Back"]
+        backButton.tap()
+        sleep(1)
+        tablesQuery/*@START_MENU_TOKEN@*/.collectionViews/*[[".cells.collectionViews",".collectionViews"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.children(matching: .cell).element.tap()
+        backButton.tap()
     }
 
     func testLaunchPerformance() throws {

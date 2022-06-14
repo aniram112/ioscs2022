@@ -118,9 +118,9 @@ final class SearchViewController: UIViewController{
         search.searchBar.searchTextField.layer.borderColor = (UIColor.black).cgColor
         search.searchBar.searchTextField.layer.borderWidth = 1.0
         search.searchBar.searchTextField.layer.cornerRadius = 10
-        search.searchBar.searchTextField.backgroundColor = .white
+        search.searchBar.searchTextField.backgroundColor = .customWhite
         search.searchBar.placeholder = " Search for character"
-        search.searchBar.searchTextField.leftView?.tintColor = .black
+        search.searchBar.searchTextField.leftView?.tintColor = .customBlack
         //search.searchBar.sizeToFit()
         search.searchBar.isTranslucent = false
         search.searchBar.backgroundImage = UIImage()
@@ -145,12 +145,12 @@ final class SearchViewController: UIViewController{
         let ret = UITableView()
         let HEADER_HEIGHT = 100
         ret.tableHeaderView?.frame.size = CGSize(width: ret.frame.width, height: CGFloat(HEADER_HEIGHT))
-        ret.backgroundColor = UIColor.white
+        ret.backgroundColor = UIColor.customWhite
         ret.layer.cornerRadius = 10
         ret.rowHeight = 250
         ret.layer.masksToBounds = true
         ret.contentMode = .scaleAspectFill
-        ret.separatorColor = .white
+        ret.separatorColor = .customWhite
         return ret
     }()
     

@@ -14,7 +14,7 @@ class RecentCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        backgroundColor = .white
+        backgroundColor = .customWhite
         collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "ImageCell")
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -71,7 +71,7 @@ class RecentCell: UITableViewCell {
         layout.minimumInteritemSpacing = 10
         
         let ret = UICollectionView(frame: frame, collectionViewLayout: layout)
-        ret.backgroundColor = UIColor.white
+        ret.backgroundColor = UIColor.customWhite
         ret.showsHorizontalScrollIndicator = false
         ret.layer.cornerRadius = 0
         ret.layer.masksToBounds = true

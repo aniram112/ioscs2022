@@ -33,6 +33,8 @@ final class SearchViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         search.isActive = true
         super.viewWillAppear(false)
+        tableView.register(RecentCell.self, forCellReuseIdentifier: "RecentCell")
+        characters = []
         //self.definesPresentationContext = true
         
         
@@ -67,6 +69,7 @@ final class SearchViewController: UIViewController{
         //self.definesPresentationContext = false
         super.viewWillDisappear(false)
         search.isActive = false
+        
         //tabBarController?.navigationItem.searchController?.isActive = false
         //self.dismiss(animated: false, completion: nil)
     }
@@ -176,6 +179,13 @@ extension SearchViewController: UITableViewDelegate {
         let Character = CharacterViewController(model: model)
         appLogger.logger.log(level: .info, message: "opening character")
         
+        if let index = Storage.shared.searchHistory.firstIndex(of: characters[indexPath.row] ) {
+            Storage.shared.searchHistory.remove(at: index)
+        }
+        Storage.shared.searchHistory.insert(characters[indexPath.row], at: 0)
+        //Storage.shared.searchHistory.append(characters[indexPath.row])
+        //Storage.shared.searchHistory.reverse()
+        
         navigationController?.modalPresentationStyle = .fullScreen
         navigationController!.pushViewController(Character, animated: true)
     }
@@ -191,7 +201,7 @@ extension SearchViewController: UITableViewDataSource {
             withIdentifier: "RecentCell",
             for: indexPath
         ) as? RecentCell
-        
+        cell?.myParent = self
         if (characters.count != 0){
             self.tableView.register(CharacterSearchCell.self, forCellReuseIdentifier: "SearchCell")
             let cell = tableView.dequeueReusableCell(

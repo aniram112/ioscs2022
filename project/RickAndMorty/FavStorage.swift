@@ -12,6 +12,7 @@ class Storage {
     
     static var shared = Storage()
     
+    var searchHistory = [Character]()
     var favCharacters = [Character]()
     var favImages = [UIImage]()
     

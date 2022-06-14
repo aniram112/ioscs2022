@@ -5,11 +5,11 @@
 //  Created by Marina Roshchupkina on 09.05.2022.
 //
 
-import Foundation
 import UIKit
 // модель с массивом картинок персонажа (кликабельно?)
 class RecentCell: UITableViewCell {
     
+    weak var myParent:SearchViewController?
     var imageURLs : [URL?]!
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
@@ -18,13 +18,13 @@ class RecentCell: UITableViewCell {
         collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "ImageCell")
         collectionView.delegate = self
         collectionView.dataSource = self
-        imageURLs = [URL(string: "https://rickandmortyapi.com/api/character/avatar/1.jpeg"),
+        /*imageURLs = [URL(string: "https://rickandmortyapi.com/api/character/avatar/1.jpeg"),
                      URL(string: "https://rickandmortyapi.com/api/character/avatar/2.jpeg"),
                      URL(string: "https://rickandmortyapi.com/api/character/avatar/3.jpeg"),
                      URL(string: "https://rickandmortyapi.com/api/character/avatar/4.jpeg"),
                      URL(string: "https://rickandmortyapi.com/api/character/avatar/5.jpeg"),
                      URL(string: "https://rickandmortyapi.com/api/character/avatar/6.jpeg"),
-        ]
+        ]*/
         label.text = "Recent"
         setupUI()
         
@@ -32,7 +32,7 @@ class RecentCell: UITableViewCell {
     
     private func setupUI() {
         addSubview(label)
-        contentView.addSubview(collectionView) // иначе скролл не работает 
+        contentView.addSubview(collectionView) // иначе скролл не работает
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -47,7 +47,7 @@ class RecentCell: UITableViewCell {
             collectionView.leftAnchor.constraint(equalTo: contentView.leftAnchor,constant: 5),
             collectionView.rightAnchor.constraint(equalTo: contentView.rightAnchor)
         ])
-                
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -76,26 +76,56 @@ class RecentCell: UITableViewCell {
         ret.layer.cornerRadius = 0
         ret.layer.masksToBounds = true
         ret.contentMode = .scaleAspectFill
-       
+        
         return ret
     }()
 }
 extension RecentCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageURLs.count
+        //return imageURLs.count
+        return Storage.shared.searchHistory.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCell
-        myCell.Image.kf.setImage(with: imageURLs[indexPath.row])
+        //myCell.Image.kf.setImage(with: imageURLs[indexPath.row])
+        Task{
+            do{
+                try await myCell.Image.image = getImage(url: Storage.shared.searchHistory[indexPath.row].image)
+            }
+            catch{
+                appLogger.logger.log(level: .error, message: "async downloading image error")
+                print("Request failed with error: \(error)")
+            }
+        }
         
         return myCell
     }
 }
 extension RecentCell: UICollectionViewDelegate {
- 
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        appLogger.logger.log(level: .info, message: "tapped on item \(indexPath.row)")
+        
+        let cell = collectionView.cellForItem(at: indexPath) as! ImageCell
+        let char = Storage.shared.searchHistory[indexPath.row]
+        
+        let model = CharacterViewController.Model(
+            cellModel: [.init(key: "Status:", value: char.status),.init(key: "Species:", value: char.species),.init(key: "Gender:", value: char.gender)],
+            name: char.name,
+            image: cell.Image.image ?? UIImage(),
+            character: char
+        )
+        let Character = CharacterViewController(model: model)
+        appLogger.logger.log(level: .info, message: "opening character")
+        
+        if let index = Storage.shared.searchHistory.firstIndex(of: char ) {
+            Storage.shared.searchHistory.remove(at: index)
+        }
+        Storage.shared.searchHistory.insert(char, at: 0)
+        //Storage.shared.searchHistory.reverse()
+        collectionView.reloadData()
+        myParent?.navigationController?.modalPresentationStyle = .fullScreen
+        myParent?.navigationController!.pushViewController(Character, animated: true)
     }
 }
 

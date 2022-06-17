@@ -18,13 +18,7 @@ class RecentCell: UITableViewCell {
         collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "ImageCell")
         collectionView.delegate = self
         collectionView.dataSource = self
-        /*imageURLs = [URL(string: "https://rickandmortyapi.com/api/character/avatar/1.jpeg"),
-                     URL(string: "https://rickandmortyapi.com/api/character/avatar/2.jpeg"),
-                     URL(string: "https://rickandmortyapi.com/api/character/avatar/3.jpeg"),
-                     URL(string: "https://rickandmortyapi.com/api/character/avatar/4.jpeg"),
-                     URL(string: "https://rickandmortyapi.com/api/character/avatar/5.jpeg"),
-                     URL(string: "https://rickandmortyapi.com/api/character/avatar/6.jpeg"),
-        ]*/
+    
         label.text = "Recent"
         setupUI()
         
@@ -93,7 +87,7 @@ extension RecentCell: UICollectionViewDataSource {
             do{
                 try await myCell.Image.image = getImage(url: Storage.shared.searchHistory[indexPath.row].image)
             }
-            catch{
+            catch {
                 appLogger.logger.log(level: .error, message: "async downloading image error")
                 print("Request failed with error: \(error)")
             }

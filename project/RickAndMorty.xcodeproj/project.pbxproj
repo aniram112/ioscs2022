@@ -103,6 +103,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7E04C41A285D204B003F932A /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				7E0DC221285660EB001975AE /* Logger.swift */,
+				7EFB4CA82857CF8B0028F15B /* FavStorage.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		7E04C41B285D2059003F932A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7E0DC23228568104001975AE /* Character.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		7E0DC22828567ACC001975AE /* RickAndMortyUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +141,8 @@
 		7EABDB52282C2B1C005CEF4A /* Root */ = {
 			isa = PBXGroup;
 			children = (
+				B87AD01A281314C300B912B2 /* AppDelegate.swift */,
+				B87AD01C281314C300B912B2 /* SceneDelegate.swift */,
 				7EABDB53282C2B3D005CEF4A /* RootViewController.swift */,
 			);
 			path = Root;
@@ -173,18 +192,15 @@
 		B87AD019281314C300B912B2 /* RickAndMorty */ = {
 			isa = PBXGroup;
 			children = (
+				7E04C41B285D2059003F932A /* Models */,
+				7E04C41A285D204B003F932A /* Utility */,
 				7EABDB52282C2B1C005CEF4A /* Root */,
 				B87AD0312813170400B912B2 /* Screens */,
 				B87AD030281316F900B912B2 /* Resources */,
-				B87AD01A281314C300B912B2 /* AppDelegate.swift */,
-				B87AD01C281314C300B912B2 /* SceneDelegate.swift */,
 				B87AD023281314C600B912B2 /* Assets.xcassets */,
 				B87AD025281314C600B912B2 /* LaunchScreen.storyboard */,
 				B87AD028281314C600B912B2 /* Info.plist */,
 				B87AD0372813176800B912B2 /* Colors.xcassets */,
-				7E0DC221285660EB001975AE /* Logger.swift */,
-				7E0DC23228568104001975AE /* Character.swift */,
-				7EFB4CA82857CF8B0028F15B /* FavStorage.swift */,
 			);
 			path = RickAndMorty;
 			sourceTree = "<group>";

@@ -34,7 +34,7 @@ class CharacterSearchCell: UITableViewCell {
             icon.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 5),
             
             label.centerYAnchor.constraint(equalTo: icon.centerYAnchor),
-            label.leadingAnchor.constraint(equalTo: icon.trailingAnchor,constant: 20),
+            label.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 20),
             label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }

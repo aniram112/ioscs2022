@@ -83,6 +83,8 @@ extension RecentCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCell
         //myCell.Image.kf.setImage(with: imageURLs[indexPath.row])
+        myCell.update(with: Storage.shared.searchHistory[indexPath.row].image)
+        /*
         Task{
             do{
                 try await myCell.Image.image = getImage(url: Storage.shared.searchHistory[indexPath.row].image)
@@ -91,7 +93,7 @@ extension RecentCell: UICollectionViewDataSource {
                 appLogger.logger.log(level: .error, message: "async downloading image error")
                 print("Request failed with error: \(error)")
             }
-        }
+        }*/
         
         return myCell
     }

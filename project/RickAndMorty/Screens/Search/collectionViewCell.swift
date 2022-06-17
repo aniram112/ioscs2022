@@ -12,7 +12,7 @@ class ImageCell : UICollectionViewCell{
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-    
+        
         self.Image = UIImageView()
         backgroundColor = UIColor.white
         layer.cornerRadius = 10
@@ -38,29 +38,33 @@ class ImageCell : UICollectionViewCell{
     }
     
     
-    struct Model {
-        var url: URL
-    }
-    
-    func update(with model: Model) {
+    func update(with imageURL: String) {
         // Cancel current task
         task?.cancel()
         
         // Start a new task
         task = Task {
-            let character = characterProvider.requestCharacter(with: model.url)
+            let url = imageURL
             
             if Task.isCancelled {
                 return
             }
             
-            update(with: character)
+            updateImage(with: url)
         }
     }
     
     private var task: Task<Void, Never>?
     
-    private func update(with character: Character) {
-        // Update state
+    private func updateImage(with url: String)  {
+        Task{
+            do{
+                try await Image.image = getImage(url: String(url))
+            }
+            catch {
+                appLogger.logger.log(level: .error, message: "async downloading image error")
+                print("Request failed with error: \(error)")
+            }
+        }
     }
 }
